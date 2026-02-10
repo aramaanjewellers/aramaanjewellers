@@ -1,0 +1,6 @@
+<section id="collection" class="collection">
+  <h2>Our Rings Collection</h2>
+  <div class="cards" id="product-list">
+    <!-- JS will render 50 rings here -->
+  </div>
+</section>
