@@ -1,6 +1,27 @@
-<section id="collection" class="collection">
-  <h2>Our Rings Collection</h2>
-  <div class="cards" id="product-list">
-    <!-- JS will render 50 rings here -->
-  </div>
-</section>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aramaan Jewellers</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Aramaan Jewellers</h1>
+    </header>
+
+    <section id="collection" class="collection">
+        <h2>Our Rings Collection</h2>
+        <div class="cards" id="product-list">
+            <!-- JS will render 50 rings here -->
+        </div>
+    </section>
+
+    <div id="lightbox" onclick="closeLightbox()" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);justify-content:center;align-items:center;">
+        <img id="lightbox-img" src="" style="max-width:90%;max-height:90%;">
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

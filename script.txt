@@ -1,0 +1,74 @@
+const products = [];
+
+// Generate 50 rings
+for(let i=1; i<=50; i++){
+  products.push({
+    id: i,
+    name: `Ring ${i}`,
+    priceINR: 7000,      
+    priceUSD: 70,        
+    sizes: ['6','7','8','9','10'],
+    colors: ['Gold','Silver','Rose Gold'],
+    description: `Beautiful handcrafted Ring ${i} for elegance and style.`,
+    image: `images/ring${i}.jpg` // Placeholder, replace with real images
+  });
+}
+
+const productList = document.getElementById('product-list');
+
+products.forEach(product => {
+  const card = document.createElement('div');
+  card.classList.add('card');
+
+  card.innerHTML = `
+    <img src="${product.image}" alt="${product.name}" onclick="openLightbox('${product.image}')">
+    <h3>${product.name}</h3>
+    <p>${product.description}</p>
+    <p>Price: ₹${product.priceINR} | $${product.priceUSD}</p>
+    <label>Size:
+      <select id="size-${product.id}">
+        ${product.sizes.map(s => `<option value="${s}">${s}</option>`).join('')}
+      </select>
+    </label>
+    <label>Band Color:
+      <select id="color-${product.id}">
+        ${product.colors.map(c => `<option value="${c}">${c}</option>`).join('')}
+      </select>
+    </label>
+    <button onclick="addToCart(${product.id})">Add to Cart</button>
+    <button onclick="orderWhatsApp(${product.id})">Order via WhatsApp</button>
+  `;
+  productList.appendChild(card);
+});
+
+// Cart (frontend-only)
+let cart = [];
+function addToCart(id){
+  const product = products.find(p => p.id===id);
+  const size = document.getElementById(`size-${id}`).value;
+  const color = document.getElementById(`color-${id}`).value;
+
+  cart.push({...product, selectedSize:size, selectedColor:color});
+  alert(`${product.name} added to cart!`);
+}
+
+// WhatsApp Order
+function orderWhatsApp(id){
+  const product = products.find(p => p.id===id);
+  const size = document.getElementById(`size-${id}`).value;
+  const color = document.getElementById(`color-${id}`).value;
+
+  const message = `Hello, I want to order:\n${product.name}\nSize: ${size}\nColor: ${color}\nPrice: ₹${product.priceINR} | $${product.priceUSD}`;
+  const phone = "919511518635"; // Your WhatsApp number
+  const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+  window.open(url, '_blank');
+}
+
+// Lightbox
+function openLightbox(src){
+    document.getElementById('lightbox').style.display='flex';
+    document.getElementById('lightbox-img').src=src;
+}
+function closeLightbox(){
+    document.getElementById('lightbox').style.display='none';
+}
